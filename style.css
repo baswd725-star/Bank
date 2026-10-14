@@ -295,6 +295,34 @@ body {
     align-items: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* جعلناها في الجهة اليسرى كما تظهر في صورتك */
+    width: 50px;  /* تحديد عرض الدائرة */
+    height: 50px; /* تحديد طول الدائرة */
+    z-index: 9999;
+    background-color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* جعلناها في الجهة اليسرى كما تظهر في صورتك */
+    width: 50px;  /* تحديد عرض الدائرة */
+    height: 50px; /* تحديد طول الدائرة */
+    z-index: 9999;
+    background-color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
 
 .whatsapp-float img {
     width: 30px;  /* حجم الأيقونة من الداخل */
