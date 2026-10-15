@@ -18,15 +18,14 @@
             text-align: center;
         }
 
-        /* الهيدر أو القسم العلوي باللون الأحمر */
+        /* الهيدر العلوي */
         .header-section {
-            background-color: #e31b23; /* لون بنك الخرطوم الأحمر */
+            background-color: #e31b23;
             color: #ffffff;
             padding: 30px 20px 40px 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* تنسيق الشعار واللوجو */
         .bank-logo-container {
             display: flex;
             align-items: center;
@@ -47,7 +46,6 @@
             position: relative;
         }
 
-        /* محاكاة الأيقونة الخضراء للبنك */
         .logo-icon::before {
             content: "«";
             color: #ffde17;
@@ -79,10 +77,9 @@
             color: #ffde17;
         }
 
-        /* زر خدمات بنكك أونلاين الأصفر */
         .services-badge {
             display: inline-block;
-            background-color: #ffc107; /* اللون الأصفر الواضح في الصورة */
+            background-color: #ffc107;
             color: #1a1a1a;
             font-size: 20px;
             font-weight: bold;
@@ -92,34 +89,92 @@
             margin-top: 10px;
         }
 
-        /* القسم السفلي الأبيض */
+        /* المحتوى الرئيسي */
         .content-section {
             background-color: #ffffff;
-            padding: 40px 20px;
-            min-height: 250px;
+            padding: 30px 20px;
         }
 
         .welcome-title {
             color: #e31b23;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .welcome-subtitle {
             color: #e31b23;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
 
         .instruction-text {
             color: #555555;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
+            margin-bottom: 25px;
         }
 
-        /* تنسيق أيقونة الواتساب الصغيرة والمثبتة */
+        /* حاوية الخدمات */
+        .services-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-bottom: 40px;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            border-color: #e31b23;
+            box-shadow: 0 4px 12px rgba(227, 27, 35, 0.1);
+        }
+
+        .service-info {
+            text-align: right;
+        }
+
+        .service-title {
+            color: #e31b23;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .service-desc {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .service-icon-box {
+            width: 45px;
+            height: 45px;
+            background-color: #fdf1f2;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e31b23;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        /* أيقونة الواتساب المثبتة */
         .whatsapp-float {
             position: fixed;
             bottom: 15px;
@@ -143,7 +198,7 @@
 </head>
 <body>
 
-    <!-- الجزء العلوي الأحمر والشعار -->
+    <!-- الهيدر -->
     <div class="header-section">
         <div class="bank-logo-container">
             <div class="logo-icon"></div>
@@ -159,17 +214,61 @@
         </div>
     </div>
 
-    <!-- الجزء السفلي والترحيب -->
+    <!-- قائمة الخدمات -->
     <div class="content-section">
         <h1 class="welcome-title">مرحباً بكم في خدمات بنكك أونلاين Bankak</h1>
         <h2 class="welcome-subtitle">Online</h2>
         <p class="instruction-text">الرجاء الاختيار من الخدمات المقدمة أدناه</p>
+
+        <div class="services-container">
+            <a href="#" class="service-card">
+                <div class="service-info">
+                    <div class="service-title">تحديث البيانات</div>
+                    <div class="service-desc">تحديث بيانات حسابك الشخصية.</div>
+                </div>
+                <div class="service-icon-box">🔄</div>
+            </a>
+
+            <a href="#" class="service-card">
+                <div class="service-info">
+                    <div class="service-title">رفع سقف التحويلات اليومية</div>
+                    <div class="service-desc">زيادة الحد اليومي للتحويلات.</div>
+                </div>
+                <div class="service-icon-box">⏱</div>
+            </a>
+
+            <a href="#" class="service-card">
+                <div class="service-info">
+                    <div class="service-title">التحويلات الخاطئة</div>
+                    <div class="service-desc">معالجة أخطاء التحويلات البنكية.</div>
+                </div>
+                <div class="service-icon-box">⇄</div>
+            </a>
+
+            <a href="#" class="service-card">
+                <div class="service-info">
+                    <div class="service-title">خدمات العملات الأجنبية</div>
+                    <div class="service-desc">تفعيل وإدارة العملات الأجنبية.</div>
+                </div>
+                <div class="service-icon-box">🌐</div>
+            </a>
+
+            <a href="#" class="service-card">
+                <div class="service-info">
+                    <div class="service-title">كشف الحساب</div>
+                    <div class="service-desc">الحصول على كشف حساب مفصل.</div>
+                </div>
+                <div class="service-icon-box">📄</div>
+            </a>
+        </div>
     </div>
 
-    <!-- زر الواتساب المصغر -->
+    <!-- زر الواتساب -->
     <a href="https://wa.me/249998924425" target="_blank" class="whatsapp-float">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
     </a>
 
+    <!-- ربط ملف الـ JS الخارجي -->
+    <script src="script.js"></script>
 </body>
 </html>
